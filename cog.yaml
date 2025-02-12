@@ -22,21 +22,14 @@ build:
     - "huggingface-hub>=0.28.1"
     - "setuptools"
     - "packaging"
-    - "inflect>=7.5.0"
-    - "kanjize>=1.5.0"
     - "phonemizer>=3.3.0"
-    - "sudachidict-full>=20241021"
-    - "sudachipy>=0.6.10"
     - "soundfile>=0.13.1"
-    - "gradio>=5.15.0"
 
   # commands run after the environment is setup
   run:
     - "curl -o /usr/local/bin/pget -L \"https://github.com/replicate/pget/releases/latest/download/pget_$(uname -s)_$(uname -m)\""
     - "chmod +x /usr/local/bin/pget"
-    - "pip install flash-attn --no-build-isolation"
     - "pip install mamba-ssm --no-build-isolation"
-    - "pip install causal-conv1d --no-build-isolation"
 
 # predict.py defines how predictions are run on your model
 predict: "predict.py:Predictor"
