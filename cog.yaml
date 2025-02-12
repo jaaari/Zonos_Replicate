@@ -14,20 +14,19 @@ build:
 
   # a list of packages in the format <package-name>==<version>
   python_packages:
-    - "packaging"
+    - "uv"
     - "torch==2.0.1"
     - "torchaudio==2.0.1"
     - "transformers"
     - "safetensors"
     - "numpy<2.0"
-    - "mamba-ssm==1.0.1"
     - "huggingface-hub"
-    - "tqdm" 
+    - "tqdm"
 
   # commands run after the environment is setup
-  # run:
-  #   - "echo env is ready!"
-  #   - "echo another command if needed"
+  run:
+    - "uv pip install --system -e ."
+    - "uv pip install --system -e .[compile]"
 
 # predict.py defines how predictions are run on your model
 predict: "predict.py:Predictor"
