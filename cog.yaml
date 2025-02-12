@@ -10,23 +10,34 @@ build:
     - "espeak-ng"
 
   # python version in the form '3.11' or '3.11.4'
-  python_version: "3.11"
+  python_version: "3.12"
 
   # a list of packages in the format <package-name>==<version>
   python_packages:
-    - "uv"
-    - "torch==2.0.1"
-    - "torchaudio==2.0.1"
-    - "transformers"
+    - "torch>=2.5.1"
+    - "torchaudio>=2.5.1"
+    - "transformers>=4.48.1"
     - "safetensors"
-    - "numpy<2.0"
-    - "huggingface-hub"
-    - "tqdm"
+    - "numpy>=2.2.2"
+    - "huggingface-hub>=0.28.1"
+    - "setuptools"
+    - "packaging"
+    - "inflect>=7.5.0"
+    - "kanjize>=1.5.0"
+    - "phonemizer>=3.3.0"
+    - "sudachidict-full>=20241021"
+    - "sudachipy>=0.6.10"
+    - "soundfile>=0.13.1"
+    - "gradio>=5.15.0"
 
   # commands run after the environment is setup
   run:
-    - "uv pip install --system -e ."
-    - "uv pip install --system -e .[compile]"
+    - "curl -o /usr/local/bin/pget -L \"https://github.com/replicate/pget/releases/latest/download/pget_$(uname -s)_$(uname -m)\""
+    - "chmod +x /usr/local/bin/pget"
+    - "pip install flash-attn --no-build-isolation"
+    - "pip install mamba-ssm --no-build-isolation"
+    - "pip install causal-conv1d --no-build-isolation"
 
 # predict.py defines how predictions are run on your model
 predict: "predict.py:Predictor"
+train: "train.py:train"
