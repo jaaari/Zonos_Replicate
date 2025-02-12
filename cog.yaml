@@ -18,6 +18,10 @@ build:
     - "torchaudio==2.1.0"
     - "transformers"
     - "safetensors"
+    - "numpy<2.0"
+    - "mamba-ssm"
+    - "huggingface-hub"
+    - "tqdm" 
 
   # commands run after the environment is setup
   # run:
