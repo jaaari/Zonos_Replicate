@@ -15,8 +15,16 @@ class Predictor(BasePredictor):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         # Load both models from local files
         self.models = {
-            "transformer": Zonos.from_pretrained("models/transformer", device=self.device),
-            "hybrid": Zonos.from_pretrained("models/hybrid", device=self.device)
+            "transformer": Zonos.from_local(
+                "models/transformer/config.json",
+                "models/transformer/model.safetensors",
+                device=self.device
+            ),
+            "hybrid": Zonos.from_local(
+                "models/hybrid/config.json",
+                "models/hybrid/model.safetensors",
+                device=self.device
+            )
         }
         # Default to transformer model
         self.model = self.models["transformer"]
